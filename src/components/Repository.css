@@ -3,6 +3,10 @@
   justify-content: space-evenly;
 }
 
+.box {
+  width: 25%;
+}
+
 .Card {
   background-color: #fff;
   color: #ccc;

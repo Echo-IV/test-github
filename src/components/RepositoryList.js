@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { getPublicRepositories } from "../services/repository";
 import RepositoryItem from "./RepositoryItem";
+import RepositoryDetail from "./RepositoryDetail";
+
 import "./Repository.css";
 
 const RepositoryList = () => {
   const [repositories, setRepositories] = useState([]);
+  const [selectedRepository, setSelectedRepository] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -16,17 +19,35 @@ const RepositoryList = () => {
     fetchData();
   }, []);
 
+  const handleRepositoryClick = (username) => {
+    setSelectedRepository(username);
+  };
+
   const renderRepositories = () => {
     return repositories.map((repositorie) => {
-      return <RepositoryItem key={repositorie.id} repositorie={repositorie} />;
+      return (
+        <RepositoryItem
+          onRepositoryClick={handleRepositoryClick}
+          key={repositorie.id}
+          repositorie={repositorie}
+        />
+      );
     });
   };
 
   return (
     <div className="wrapper">
-      <div>
+      <div className="box">
         <p>Public Repositories</p>
         {renderRepositories()}
+      </div>
+      <div className="box">
+        {selectedRepository && (
+          <>
+            <p>User Repositories detail</p>
+            <RepositoryDetail username={selectedRepository} />
+          </>
+        )}
       </div>
     </div>
   );
