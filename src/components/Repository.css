@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Card {
+  background-color: #fff;
+  color: #ccc;
+}
